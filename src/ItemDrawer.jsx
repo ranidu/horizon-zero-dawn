@@ -1,5 +1,6 @@
 import { map } from "lodash";
-import { Card, Flex, Image } from "antd";
+import { ShoppingCartOutlined } from '@ant-design/icons'
+import { Card, Flex, Image, Button } from "antd";
 import thumb_1 from '/0.jpeg'
 
 const ItemDrawer = ({ items }) => {
@@ -12,7 +13,7 @@ const ItemDrawer = ({ items }) => {
         <Card
           key={`card-item-${index}`}
           hoverable
-          style={{ width: 240 }}
+          style={{ width: 240, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
           cover={
             <div style={{ height: 250, overflow: 'hidden' }}>
             <Image
@@ -23,6 +24,7 @@ const ItemDrawer = ({ items }) => {
             />
             </div>
           }
+          actions={[<Flex justify="flex-end" align="center" style={{ paddingRight: '10px'}}><Button type="primary" icon={<ShoppingCartOutlined />} /></Flex>]}
         >
           <Meta title={`${item.itemName} - ${item.unitPrice}`} description={item.itemDesc} />
         </Card>

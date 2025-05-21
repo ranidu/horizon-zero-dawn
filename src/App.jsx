@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { map, first, isEmpty } from "lodash";
-import { Input, Button, Flex, Tabs, Result } from "antd";
+import { Input, Button, Flex, Tabs, Result, Avatar, Badge } from "antd";
+import { ShoppingOutlined } from '@ant-design/icons'
 import viteLogo from "/logo-h.png";
 import "./App.css";
 
@@ -118,7 +119,7 @@ import ItemDrawer from "./ItemDrawer";
 // };
 
 function App() {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState("11347520-1a5a-4159-a056-a84591f6a827");
   const [response, setResponse] = useState([]);
   const [isError, setIsError] = useState(false);
 
@@ -134,32 +135,34 @@ function App() {
       })
       .then((data) => {
         if (!data) setResponse([]);
-        setIsError(false)
+        setIsError(false);
         setResponse(data);
       })
       .catch((error) => {
         console.log(`Error --`, error);
         setIsError(true);
+        setResponse([]);
       });
   }, [input]);
 
   return (
     <>
-      <Flex vertical>
-        <Flex align="center" justify="center">
-          <a href="https://vite.dev" target="_blank">
-            <img src={viteLogo} className="logo" alt="Vite logo" />
-          </a>
+      <Flex vertical gap={40}>
+        <Flex justify="flex-end">
+          <Badge count={1}>
+            <Avatar shape="square" size="large" icon={<ShoppingOutlined />} />
+          </Badge>
         </Flex>
         <Flex gap={10} justify="center">
           <Input
             placeholder="holographic UUID"
             variant="filled"
+            value={input}
             style={{ width: 450 }}
             onChange={(e) => setInput(e.target.value)}
           />
           <Button color="pink" variant="solid" onClick={handleFetchTemplate}>
-            Fetch GAIA
+            Fetch Cart
           </Button>
         </Flex>
         <Flex justify="center">
@@ -178,7 +181,7 @@ function App() {
             <Result
               status="warning"
               title="There are some problems with GAIA operation."
-              subTitle='GAIA was a hyper-powerful artificial intelligence that played a major role leading up to the events in Horizon Zero Dawn. The single most powerful, most advanced A.I. ever created capable of advanced planetary engineering, GAIA was Project Zero Dawns governing A.I. With its suite of nine subordinate functions, GAIA oversaw Zero Dawn’s successful restoration of life to Earth after its eradication by the Faro Plague.'
+              subTitle="GAIA was a hyper-powerful artificial intelligence that played a major role leading up to the events in Horizon Zero Dawn. The single most powerful, most advanced A.I. ever created capable of advanced planetary engineering, GAIA was Project Zero Dawns governing A.I. With its suite of nine subordinate functions, GAIA oversaw Zero Dawn’s successful restoration of life to Earth after its eradication by the Faro Plague."
               extra={
                 <Button type="primary" key="console">
                   Email: Elisabet Sobeck
