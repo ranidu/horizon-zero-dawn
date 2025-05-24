@@ -3,7 +3,7 @@ import { ShoppingCartOutlined } from '@ant-design/icons'
 import { Card, Flex, Image, Button } from "antd";
 import thumb_1 from '/0.jpeg'
 
-const ItemDrawer = ({ items }) => {
+const ItemDrawer = ({ items, handleAdd }) => {
   const { Meta } = Card
   if (!items) return;
 
@@ -24,7 +24,7 @@ const ItemDrawer = ({ items }) => {
             />
             </div>
           }
-          actions={[<Flex justify="flex-end" align="center" style={{ paddingRight: '10px'}}><Button type="primary" icon={<ShoppingCartOutlined />} /></Flex>]}
+          actions={[<Flex justify="flex-end" align="center" style={{ paddingRight: '10px'}}><Button onClick={() => handleAdd(item)} type="primary" icon={<ShoppingCartOutlined />} /></Flex>]}
         >
           <Meta title={`${item.itemName} - ${item.unitPrice}`} description={item.itemDesc} />
         </Card>
